@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"editorconfig.editorconfig",
+		"alexcvzz.vscode-sqlite",
+		"mikestead.dotenv",
+		"kvcvc.sequelize-snippets"
+	]
+}
