@@ -39,7 +39,7 @@ const PublicFigure = sequelize.define('PublicFigure', {
 	},
 	photo: {
 		type: DataTypes.STRING,
-		allowNull: true,
+		allowNull: false,
 	},
 	user_id: {
 		type: DataTypes.UUID,
