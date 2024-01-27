@@ -3,29 +3,29 @@ import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcrypt';
 
 import User from '../../models/User';
-// import schemaUser from '../../validations/';
+import schemaUser from '../../validations/userValidator';
 
-const create = async (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
 	const { name, email, password, role } = req.body;
 
-	const encryptedPassword = await bcrypt.hash(password, 10);
-
 	try {
-		const newUser = await User.create({
+		const encryptedPassword = await bcrypt.hash(password, 10);
+
+		const user = {
 			name,
 			email,
 			password: encryptedPassword,
 			role
-		});
+		};
 
-		// const user = newUser.toJSON();
+		const userValidator = await schemaUser.validate(user);
 
-		res.status(StatusCodes.CREATED).json({ newUser });
+		await User.create(userValidator);
+
+		res.status(StatusCodes.CREATED).json({ userValidator });
 	} catch (error: any) {
 		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
 			message: error.message
 		});
 	}
 };
-
-export default create;
