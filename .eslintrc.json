@@ -19,10 +19,10 @@
         "@typescript-eslint"
     ],
     "rules": {
+			"@typescript-eslint/no-explicit-any": "off",
 			"indent": ["error", "tab"],
 			"linebreak-style": ["error", "windows"],
 			"quotes": ["error", "single"],
-			"semi": ["error", "always"],
-			"eslint-disable @typescript-eslint/no-explicit-any": "off"
+			"semi": ["error", "always"]
     }
 }
