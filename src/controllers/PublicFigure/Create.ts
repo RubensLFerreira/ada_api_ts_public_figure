@@ -2,24 +2,28 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 import PublicFigure from '../../models/PublicFigure';
+import schemaFigure from '../../validations/figureValidator';
 
 export const createFigure = async (req: Request, res: Response) => {
-	const publicFigureData = req.body;
+	const figuresData = req.body;
 	const file = req.file;
 
 	if (!file || file === undefined) {
 		return res.status(StatusCodes.BAD_REQUEST)
-			.json({ message: 'Image is required' });
+			.json({ message: 'Photo is required' });
 	}
 
-	publicFigureData.photo = file.filename;
+	figuresData.photo = file.filename;
 
 	try {
-		const publicFigure = await PublicFigure.create(publicFigureData);
+		const figureValidate = await schemaFigure.validate(figuresData);
 
-		return res.status(StatusCodes.CREATED).json(publicFigure);
+		const publicFigure = await PublicFigure.create(figureValidate);
+
+		return res.status(StatusCodes.CREATED)
+			.json(publicFigure);
 	} catch (error: any) {
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+		return res.status(StatusCodes.BAD_REQUEST)
 			.json({ message: error.message });
 	}
 };

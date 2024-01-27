@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcrypt';
 
 import User from '../../models/User';
+// import schemaUser from '../../validations/';
 
 const create = async (req: Request, res: Response) => {
 	const { name, email, password, role } = req.body;
