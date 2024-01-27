@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import 'dotenv/config';
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';

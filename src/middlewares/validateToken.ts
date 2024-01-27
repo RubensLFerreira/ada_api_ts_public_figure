@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import 'dotenv/config';
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
@@ -9,7 +8,7 @@ interface IRequest extends Request {
 }
 
 const validateToken = async (req: IRequest, res: Response, next: NextFunction) => {
-	const token = req.headers.authorization?.split('')[1];
+	const token = req.headers.authorization?.split(' ')[1];
 
 	if (!token) {
 		return res.status(StatusCodes.UNAUTHORIZED).json({
