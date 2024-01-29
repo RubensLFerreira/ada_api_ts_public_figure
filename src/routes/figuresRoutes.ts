@@ -9,7 +9,8 @@ import {
 	createFigure,
 	updateFigure,
 	deleteFigure,
-	getById
+	getById,
+	getOnePhoto
 } from '../controllers/PublicFigure';
 
 const router = Router();
@@ -18,11 +19,13 @@ router.route('/search-name').get(getByName);
 
 router.route('/')
 	.get(getAllFigures)
-	.post(validateToken, upload.single('photo'), createFigure);
+	.post(upload.single('photo'), createFigure);
 
 router.route('/:id')
 	.put(validateToken, upload.single('photo'), updateFigure)
 	.delete(validateToken, deleteFigure)
 	.get(getById);
+
+router.route('/photo/:photoId').get(getOnePhoto);
 
 export default router;
