@@ -8,6 +8,8 @@ export const createFigure = async (req: Request, res: Response) => {
 	const figuresData = req.body;
 	const file = req.file;
 
+	console.log(file);
+
 	if (!file || file === undefined) {
 		return res.status(StatusCodes.BAD_REQUEST)
 			.json({ message: 'Photo is required' });
@@ -18,12 +20,12 @@ export const createFigure = async (req: Request, res: Response) => {
 	try {
 		const figureValidate = await schemaFigure.validate(figuresData);
 
-		const publicFigure = await PublicFigure.create(figureValidate);
+		await PublicFigure.create(figureValidate);
 
 		return res.status(StatusCodes.CREATED)
-			.json(publicFigure);
+			.json(figureValidate);
 	} catch (error: any) {
-		return res.status(StatusCodes.BAD_REQUEST)
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR)
 			.json({ message: error.message });
 	}
 };
