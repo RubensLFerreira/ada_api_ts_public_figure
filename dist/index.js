@@ -8,7 +8,7 @@ const Server_1 = __importDefault(require("./src/Server"));
 connection_1.default
     .authenticate()
     .then(() => {
-    console.log("Connection established successfully!");
+    console.log('Connection established successfully!');
     Server_1.default.listen(8080, () => {
         console.log(`Server running at http://localhost:${process.env.PORT}`);
     });
