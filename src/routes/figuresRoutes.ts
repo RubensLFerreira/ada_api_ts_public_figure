@@ -19,7 +19,7 @@ router.route('/search-name').get(getByName);
 
 router.route('/')
 	.get(getAllFigures)
-	.post(upload.single('photo'), createFigure);
+	.post(validateToken, upload.single('photo'), createFigure);
 
 router.route('/:id')
 	.put(validateToken, upload.single('photo'), updateFigure)
